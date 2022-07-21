@@ -1,0 +1,43 @@
+args = {...}
+
+function getTableLength(T)
+	local lengthNum = 0
+	for k, v in pairs(T) do
+		lengthNum = lengthNum + 1
+	end
+	return lengthNum
+end
+
+if getTableLength(args) == 0 then
+	args = {'iubsrdhuohobujefvhbkaskhdguikherghjougujadsfhjkul'}
+end
+
+outChest = peripheral.wrap("REPLACE_WITH_OUTPUT_CHEST")
+
+function getItem(toFind)
+	local boxes = peripheral.getNames()
+	local coros = {}
+	for _, name in pairs(boxes) do
+		if peripheral.hasType(name, "inventory") then
+			local peri = peripheral.wrap(name)
+			local list = peri.list()
+			--local c = coroutine.create(function(periName, periList)
+				for slot, item in pairs(periList) do
+					if item.name:find(toFind) then
+						outChest.pullItems(name, slot, item.count)
+					end
+				end
+			--end)
+			--table.insert(coros, c)
+			--coroutine.resume(c, name, list)
+		end
+	end
+	
+	--for _, c in pairs(coros) do
+		--while c.running() do
+			--sleep(0)
+		--end
+	--end
+end
+
+getItem(args[0])
