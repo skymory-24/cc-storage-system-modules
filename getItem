@@ -22,7 +22,7 @@ function getItem(toFind)
 			local peri = peripheral.wrap(name)
 			local list = peri.list()
 			--local c = coroutine.create(function(periName, periList)
-				for slot, item in pairs(periList) do
+				for slot, item in pairs(list) do
 					if item.name:find(toFind) then
 						outChest.pullItems(name, slot, item.count)
 					end
