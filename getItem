@@ -40,4 +40,4 @@ function getItem(toFind)
 	--end
 end
 
-getItem(args[0])
+getItem(args[1])
